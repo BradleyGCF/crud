@@ -16,6 +16,10 @@ let products = [
 app.use(morgan("dev")); // Configura Morgan para mostrar logs en formato 'dev'
 app.use(express.json()); // Middleware para parsear JSON en el body de las peticiones
 
+app.get("/note.txt", (req, res) => {
+  res.send("esto no es un archivo");
+});
+
 // Configuración de variables de la aplicación
 app.set("nombre de la app", "express course"); // Establece una variable global de la aplicación
 
@@ -85,6 +89,8 @@ app.get("/products/:id", (req, res) => {
   }
   res.send(productFound);
 });
+
+app.use("/public", express.static("./public")); // Configura Express para servir archivos estáticos desde la carpeta 'public'
 
 // Iniciar el servidor
 app.listen(3000, () => {
